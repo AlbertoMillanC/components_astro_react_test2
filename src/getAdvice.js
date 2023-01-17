@@ -1,9 +1,7 @@
 const getAdvice = async () => {
-  const response = await fetch("https://jsonplaceholder.typicode.com/posts/1", {
-    method: "GET",
-  });
+  const response = await fetch("https://jsonplaceholder.typicode.com/todos");
   const resp = await response.json();
-  const body = resp.body; // <-- añadir esta línea
+  const body = resp.title; // <-- añadir esta línea
   return { body }; // <-- y devolver el objeto con el nombre
 };
 

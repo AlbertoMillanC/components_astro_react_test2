@@ -1,13 +1,32 @@
-const AdviceGenerator = ({ body }) => {
-    const onClickButton = async () => {
-        const response = await getAdvice()
-        setResponse(response)
-    } 
-    return (
-        <div className="text-center ">
-            <label className=" font-semibold mb-4 bg-gray-200 p-4 rounded-md " >"{response}"</label>
-            <button className="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded-full" onClick={() => onClickButton()}>click button</button>
-        </div>
-    )
+import { useState } from 'react'
+import { useEffect } from 'react'
+
+
+function getAdvice() {
+  const url = 'https://jsonplaceholder.typicode.com/todos'  
+  const [todos,setTodos] = useState()
+  const fetchApi = async () => {
+    const response = await fetch(url)
+    const responseJSON = await response.json() 
+    setTodos(responseJSON)
+
+  }
+  useEffect (() => {
+    fetchApi()
+  },[])
+  return (
+    <div>
+      <h1 className="bg-slate-100 text-">GENERADOR </h1>
+      <ul>
+        
+      
+      {!todos ? 'cargando...' :
+      todos.map((todo,index)=>{
+        return <li key={index}>{ todo.id}, {todo.title}, {todo.userId},{todo.body} </li>
+      }) }
+      </ul>
+    </div>
+  )
 }
-export default AdviceGenerator
+
+export default getAdvice
