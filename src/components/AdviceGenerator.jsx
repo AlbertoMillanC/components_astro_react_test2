@@ -12,21 +12,27 @@ const AdviceGenerator = ({ products: initialProducts }) => {
     fetchApi();
   }, []);
   return (
-    <div>
-      <h1 className="bg-slate-100 text-">GENERADOR </h1>
-      <ul>
-        {!currentProducts
-          ? "cargando..."
-          : currentProducts.map((products, index) => {
-              return <li key={index}>{products.title}</li>;
-            })}
-      </ul>
+    <div >
+      <h1 className=" bg-slate-100 text-">GENERADOR </h1>
+
+      {!currentProducts
+        ? "cargando..."
+        : currentProducts.map((products, index) => {
+            return (
+              <div  className=" " >
+                 <div  className="container mt-4  " >
+                 {products.title}
+                 </div>
+                {products.category} ;
+
+                <div   className="container text-red-600 border-top  bg-slate-200 " >
+                {products.description}
+                </div>
+              </div>
+            );
+          })}
     </div>
   );
 };
 
-
-
 export default AdviceGenerator;
-
-
