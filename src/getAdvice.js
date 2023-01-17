@@ -1,8 +1,8 @@
-const getAdvice = async () => {
-  const response = await fetch("https://jsonplaceholder.typicode.com/todos");
+const getProducts = async () => {
+  const response = await fetch("https://dummyjson.com/products", {
+    method: "GET",
+  });
   const resp = await response.json();
-  const body = resp.title; // <-- añadir esta línea
-  return { body }; // <-- y devolver el objeto con el nombre
+  return resp.products;
 };
-
-export default getAdvice;
+export default getProducts;

@@ -1,13 +1,12 @@
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
+import getProducts from "../getAdvice";
 
-function getAdvice() {
-  const url = "https://jsonplaceholder.typicode.com/todos";
-  const [todos, setTodos] = useState();
+const AdviceGenerator = ({ products: initialProducts }) => {
+  const [currentProducts, setCurrentProducts] = useState(initialProducts);
+
   const fetchApi = async () => {
-    const response = await fetch(url);
-    const responseJSON = await response.json();
-    setTodos(responseJSON);
+    const responseJSON = await getProducts();
+    setCurrentProducts(responseJSON);
   };
   useEffect(() => {
     fetchApi();
@@ -16,18 +15,18 @@ function getAdvice() {
     <div>
       <h1 className="bg-slate-100 text-">GENERADOR </h1>
       <ul>
-        {!todos
+        {!currentProducts
           ? "cargando..."
-          : todos.map((todo, index) => {
-              return (
-                <li key={index}>
-                  {todo.id}, {todo.title}, {todo.userId},{todo.body}{" "}
-                </li>
-              );
+          : currentProducts.map((products, index) => {
+              return <li key={index}>{products.title}</li>;
             })}
       </ul>
     </div>
   );
-}
+};
 
-export default getAdvice;
+
+
+export default AdviceGenerator;
+
+
